@@ -1,3 +1,5 @@
+import os
+
 class AndarInvalidoError(Exception):
     pass
 
@@ -25,14 +27,29 @@ class Elevador:
 elev = Elevador(15)
 
 while True:  
+    os.system("cls")  
     try:
-        print("^^^^^^^PAINEL DO ELEVADOR^^^^^^^")
-        x = int(input("selecione o andar desejado: "))
-        elev.movimentar(x)
-        break
+        print("\n^^^^^^^PAINEL DO ELEVADOR^^^^^^^")
+        print("1 - escolher andar\n2 - verificar andar\n3 - sair do elevador")
+        opcao = int(input("escolha uma operacao: "))
+
+        if opcao == 1:
+
+            x = int(input("selecione o andar desejado: "))
+            elev.movimentar(x)
+        elif opcao == 2:
+            x  = elev.verificar_andar()
+        
+        elif opcao == 3:
+            print("saindo do elevador...")
+            break
+        else:
+            print("operacao inexistente!")
+
     except ValueError:
-        print("caractere invalido! Selecione um andar de 1 a 15")
+        print("caractere invalido! Selecione um andar de 1 a 15\n")
 
     except AndarInvalidoError as erro:
         print(erro)
         
+print(x)
