@@ -1,3 +1,6 @@
+class AndarInvalidoError(Exception):
+    pass
+
 class Elevador:
     def __init__(self, qntd_andares):
         self.quantidade = qntd_andares
@@ -10,7 +13,7 @@ class Elevador:
             print(f"indo para {self.andar_atual} andar...")
 
         else:
-            print("andar indisponivel!")
+            raise AndarInvalidoError("andar indisponivel!")
     
     def verificar_andar(self):
         if self.andar_atual == self.terreo:
@@ -19,9 +22,17 @@ class Elevador:
         else:
             print(f"voce esta no {self.andar_atual} andar")
 
-
 elev = Elevador(15)
-elev.movimentar(-10)
-elev.movimentar(10)
-elev.movimentar(1)
-elev.verificar_andar()
+
+while True:  
+    try:
+        print("^^^^^^^PAINEL DO ELEVADOR^^^^^^^")
+        x = int(input("selecione o andar desejado: "))
+        elev.movimentar(x)
+        break
+    except ValueError:
+        print("caractere invalido! Selecione um andar de 1 a 15")
+
+    except AndarInvalidoError as erro:
+        print(erro)
+        
